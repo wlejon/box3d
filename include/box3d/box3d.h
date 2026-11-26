@@ -1571,6 +1571,12 @@ B3_API void b3PrismaticJoint_SetSpringDampingRatio( b3JointId jointId, float dam
 /// Get the prismatic spring damping ratio (non-dimensional)
 B3_API float b3PrismaticJoint_GetSpringDampingRatio( b3JointId jointId );
 
+/// Set the prismatic joint maximum spring force, usually in newtons (0 = unclamped)
+B3_API void b3PrismaticJoint_SetMaxSpringForce( b3JointId jointId, float maxForce );
+
+/// Get the prismatic joint maximum spring force, usually in newtons (0 = unclamped)
+B3_API float b3PrismaticJoint_GetMaxSpringForce( b3JointId jointId );
+
 /// Set the prismatic joint target translation. Usually in meters.
 B3_API void b3PrismaticJoint_SetTargetTranslation( b3JointId jointId, float targetTranslation );
 
@@ -1651,6 +1657,12 @@ B3_API void b3RevoluteJoint_SetSpringDampingRatio( b3JointId jointId, float damp
 
 /// Get the revolute joint spring damping ratio, non-dimensional
 B3_API float b3RevoluteJoint_GetSpringDampingRatio( b3JointId jointId );
+
+/// Set the revolute joint maximum spring torque, usually in newton-meters (0 = unclamped)
+B3_API void b3RevoluteJoint_SetMaxSpringTorque( b3JointId jointId, float maxTorque );
+
+/// Get the revolute joint maximum spring torque, usually in newton-meters (0 = unclamped)
+B3_API float b3RevoluteJoint_GetMaxSpringTorque( b3JointId jointId );
 
 /// Set the revolute joint target angle in radians
 B3_API void b3RevoluteJoint_SetTargetAngle( b3JointId jointId, float targetRadians );

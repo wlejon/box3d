@@ -180,6 +180,20 @@ float b3PrismaticJoint_GetSpringDampingRatio( b3JointId jointId )
 	return base->prismaticJoint.dampingRatio;
 }
 
+void b3PrismaticJoint_SetMaxSpringForce( b3JointId jointId, float maxForce )
+{
+	B3_CHECK_INPUT( b3IsValidFloat( maxForce ) && maxForce >= 0.0f );
+
+	b3JointSim* base = b3GetJointSimCheckType( jointId, b3_prismaticJoint );
+	base->prismaticJoint.maxSpringForce = maxForce;
+}
+
+float b3PrismaticJoint_GetMaxSpringForce( b3JointId jointId )
+{
+	b3JointSim* base = b3GetJointSimCheckType( jointId, b3_prismaticJoint );
+	return base->prismaticJoint.maxSpringForce;
+}
+
 void b3PrismaticJoint_EnableMotor( b3JointId jointId, bool enableMotor )
 {
 	b3World* world = b3GetWorld( jointId.world0 );
@@ -474,7 +488,18 @@ void b3SolvePrismaticJoint( b3JointSim* base, b3StepContext* context, bool useBi
 		b3Vec3 vRel = b3Sub( b3Sub( b3Add( vB, b3Cross( wB, rB ) ), vA ), b3Cross( wA, b3Add( rA, d ) ) );
 		float cdot = b3Dot( vRel, jointAxis );
 		float deltaImpulse = -massScale * axialMass * ( cdot + bias ) - impulseScale * joint->springImpulse;
-		joint->springImpulse += deltaImpulse;
+		if ( joint->maxSpringForce > 0.0f )
+		{
+			float oldImpulse = joint->springImpulse;
+			float maxImpulse = joint->maxSpringForce * context->h;
+			float newImpulse = b3ClampFloat( oldImpulse + deltaImpulse, -maxImpulse, maxImpulse );
+			deltaImpulse = newImpulse - oldImpulse;
+			joint->springImpulse = newImpulse;
+		}
+		else
+		{
+			joint->springImpulse += deltaImpulse;
+		}
 
 		b3Vec3 P = b3MulSV( deltaImpulse, jointAxis );
 		b3Vec3 LA = b3MulSV( deltaImpulse, sAx );

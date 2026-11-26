@@ -797,6 +797,7 @@ b3JointId b3CreatePrismaticJoint( b3WorldId worldId, const b3PrismaticJointDef* 
 	B3_CHECK_INPUT_RETURN( b3IsValidJointDef( &def->base ), (b3JointId){ 0 } );
 	B3_CHECK_INPUT_RETURN( b3IsValidFloat( def->hertz ), (b3JointId){ 0 } );
 	B3_CHECK_INPUT_RETURN( b3IsValidFloat( def->dampingRatio ), (b3JointId){ 0 } );
+	B3_CHECK_INPUT_RETURN( b3IsValidFloat( def->maxSpringForce ) && def->maxSpringForce >= 0.0f, (b3JointId){ 0 } );
 	B3_CHECK_INPUT_RETURN( b3IsValidFloat( def->targetTranslation ), (b3JointId){ 0 } );
 	B3_CHECK_INPUT_RETURN( b3IsValidFloat( def->lowerTranslation ), (b3JointId){ 0 } );
 	B3_CHECK_INPUT_RETURN( b3IsValidFloat( def->upperTranslation ), (b3JointId){ 0 } );
@@ -817,6 +818,7 @@ b3JointId b3CreatePrismaticJoint( b3WorldId worldId, const b3PrismaticJointDef* 
 	joint->prismaticJoint = (b3PrismaticJoint){ 0 };
 	joint->prismaticJoint.hertz = def->hertz;
 	joint->prismaticJoint.dampingRatio = def->dampingRatio;
+	joint->prismaticJoint.maxSpringForce = def->maxSpringForce;
 	joint->prismaticJoint.targetTranslation = def->targetTranslation;
 	joint->prismaticJoint.lowerTranslation = def->lowerTranslation;
 	joint->prismaticJoint.upperTranslation = def->upperTranslation;
@@ -838,6 +840,7 @@ b3JointId b3CreateRevoluteJoint( b3WorldId worldId, const b3RevoluteJointDef* de
 	B3_CHECK_INPUT_RETURN( b3IsValidFloat( def->targetAngle ), (b3JointId){ 0 } );
 	B3_CHECK_INPUT_RETURN( b3IsValidFloat( def->hertz ), (b3JointId){ 0 } );
 	B3_CHECK_INPUT_RETURN( b3IsValidFloat( def->dampingRatio ), (b3JointId){ 0 } );
+	B3_CHECK_INPUT_RETURN( b3IsValidFloat( def->maxSpringTorque ) && def->maxSpringTorque >= 0.0f, (b3JointId){ 0 } );
 	B3_CHECK_INPUT_RETURN( b3IsValidFloat( def->lowerAngle ), (b3JointId){ 0 } );
 	B3_CHECK_INPUT_RETURN( b3IsValidFloat( def->upperAngle ), (b3JointId){ 0 } );
 	B3_CHECK_INPUT_RETURN( b3IsValidFloat( def->maxMotorTorque ), (b3JointId){ 0 } );
@@ -856,6 +859,7 @@ b3JointId b3CreateRevoluteJoint( b3WorldId worldId, const b3RevoluteJointDef* de
 	joint->revoluteJoint = (b3RevoluteJoint){ 0 };
 	joint->revoluteJoint.hertz = def->hertz;
 	joint->revoluteJoint.dampingRatio = def->dampingRatio;
+	joint->revoluteJoint.maxSpringTorque = def->maxSpringTorque;
 	joint->revoluteJoint.targetAngle = b3ClampFloat( def->targetAngle, -B3_PI, B3_PI );
 
 	float lowerAngle = b3MinFloat( def->lowerAngle, def->upperAngle );

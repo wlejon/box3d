@@ -567,6 +567,7 @@ b3PrismaticJointDef b3RecR_PRISMATICJOINTDEF( b3RecReader* rdr )
 	def.enableSpring = b3RecR_BOOL( rdr );
 	def.hertz = b3RecR_F32( rdr );
 	def.dampingRatio = b3RecR_F32( rdr );
+	def.maxSpringForce = b3RecR_F32( rdr );
 	def.targetTranslation = b3RecR_F32( rdr );
 	def.enableLimit = b3RecR_BOOL( rdr );
 	def.lowerTranslation = b3RecR_F32( rdr );
@@ -585,6 +586,7 @@ b3RevoluteJointDef b3RecR_REVOLUTEJOINTDEF( b3RecReader* rdr )
 	def.enableSpring = b3RecR_BOOL( rdr );
 	def.hertz = b3RecR_F32( rdr );
 	def.dampingRatio = b3RecR_F32( rdr );
+	def.maxSpringTorque = b3RecR_F32( rdr );
 	def.enableLimit = b3RecR_BOOL( rdr );
 	def.lowerAngle = b3RecR_F32( rdr );
 	def.upperAngle = b3RecR_F32( rdr );

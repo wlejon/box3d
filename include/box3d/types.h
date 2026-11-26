@@ -966,6 +966,9 @@ typedef struct b3PrismaticJointDef
 	/// The spring damping ratio, non-dimensional
 	float dampingRatio;
 
+	/// Maximum spring force in newtons (0 = unclamped)
+	float maxSpringForce;
+
 	/// The target translation for the joint in meters. The spring-damper will drive
 	/// to this translation.
 	float targetTranslation;
@@ -1013,6 +1016,9 @@ typedef struct b3RevoluteJointDef
 
 	/// The spring damping ratio, non-dimensional.
 	float dampingRatio;
+
+	/// Maximum spring torque in newton-meters (0 = unclamped).
+	float maxSpringTorque;
 
 	/// A flag to enable joint limits.
 	bool enableLimit;

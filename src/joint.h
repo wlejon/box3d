@@ -249,6 +249,7 @@ typedef struct b3PrismaticJoint
 	float upperImpulse;
 	float hertz;
 	float dampingRatio;
+	float maxSpringForce;
 	float maxMotorForce;
 	float motorSpeed;
 	float targetTranslation;
@@ -282,6 +283,7 @@ typedef struct b3RevoluteJoint
 	float upperImpulse;
 	float hertz;
 	float dampingRatio;
+	float maxSpringTorque;
 	float maxMotorTorque;
 	float motorSpeed;
 	float targetAngle;
@@ -315,6 +317,7 @@ typedef struct b3SphericalJoint
 	float swingImpulse;
 	float hertz;
 	float dampingRatio;
+	float maxSpringTorque;
 	float maxMotorTorque;
 	b3Vec3 motorVelocity;
 	float lowerTwistAngle;
